@@ -36,7 +36,7 @@ fun App() {
         Row{
             Button(onClick = {
                 client.start()
-                client.send("hello")
+                client.send("hello", "hello2")
                 text = client.get()!!
                 client.finish()
             }) {Text("Войти")}

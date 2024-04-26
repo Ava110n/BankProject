@@ -1,7 +1,5 @@
 import java.io.BufferedReader
-import java.io.BufferedWriter
 import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.net.ServerSocket
 import java.net.Socket
@@ -25,12 +23,15 @@ class Server(val port: Int = 8080) {
         try{
 
             socketClient = socketServer.accept()
-            var text = BufferedReader(InputStreamReader(socketClient.getInputStream()))
-            println(text.readLine())
+            ///var br = BufferedReader(InputStreamReader(socketClient.getInputStream()))
+            with(BufferedReader(InputStreamReader(socketClient.getInputStream()))){
+                var line = this.readLine()
+                println(line)
+            }
+
             pw = PrintWriter(socketClient.getOutputStream(), true)
             pw.println("hello from server"+ count)
-            Thread.sleep(8000)
-            //pw.println("http/1.1 200 OK")
+            //Thread.sleep(8000)
         }
         catch (e: Exception){
             println(e.message)
